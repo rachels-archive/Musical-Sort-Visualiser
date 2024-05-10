@@ -12,6 +12,6 @@ for (let i = 0; i < n; i++) {
   bar.style.height = array[i] * 100 + "%";
   bar.style.width = "10px";
   bar.style.backgroundColor = "black";
-  const container = document.querySelector(".container");
+  const container = document.getElementById("container");
   container.appendChild(bar);
 }
