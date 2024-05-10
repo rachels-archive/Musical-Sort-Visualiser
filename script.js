@@ -1,6 +1,8 @@
 const n = 30;
 const array = [];
 
+let isSorting = false;
+
 let sortTimeout = null;
 
 // initialise randomly generated bars
@@ -34,23 +36,45 @@ function initBars() {
   for (let i = 0; i < n; i++) {
     array[i] = Math.random();
   }
+  isSorting = false;
   displayBars();
 }
 
 function sort() {
+  if (isSorting) {
+    return;
+  }
+  isSorting = true;
   /*
     array.slice() sorts the copy of the global array.
     By creating a copy of the array, animate() can modify the copy
     without affecting the original array, ensuring accurate
     representation of each step taken in the sorting process.
    */
-  const moves = bubbleSort(array.slice());
-  animate(moves);
+
+  const selectedSort = document.getElementById("selectedSort").value;
+  switch (selectedSort) {
+    case "bubble":
+      const moves = bubbleSort(array.slice());
+      animate(moves);
+      break;
+    case "selection":
+      selectionSort();
+      break;
+    case "insertion":
+      insertionSort();
+      break;
+    default:
+      // Handle default case if needed
+      break;
+  }
 }
 
 function animate(moves) {
   if (moves.length == 0) {
     displayBars();
+    isSorting = false;
+    document.getElementById("sortBtn").disabled = false;
     return;
   }
 
@@ -91,6 +115,9 @@ function bubbleSort(array) {
   return moves;
 }
 
+function selectionSort() {}
+function insertion() {}
+
 function displayBars(move) {
   const container = document.getElementById("container");
   container.innerHTML = "";
@@ -104,4 +131,10 @@ function displayBars(move) {
     }
     container.appendChild(bar);
   }
+
+  document.getElementById("sortBtn").disabled = isSorting;
 }
+
+document.getElementById("sortBtn").addEventListener("click", function () {
+  this.disabled = true;
+});
