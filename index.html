@@ -8,11 +8,17 @@
   </head>
   <body>
     <h1>Sorting Algorithm Visualiser</h1>
+
+    <label for="sort">Choose an algorithm:</label>
+    <select name="sort" id="sort">
+      <option value="bubbleSort">Bubble Sort</option>
+    </select>
     <div id="container"></div>
 
-    <button onclick="initBars()">Shuffle</button>
-    <button onclick="bubbleSort()">Bubble Sort</button>
-
+    <div>
+      <button onclick="initBars()">Shuffle</button>
+      <button onclick="sort()">Sort</button>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
